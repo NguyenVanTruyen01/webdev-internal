@@ -16,9 +16,18 @@ const CartItem = ({ shoes }: CartItemProps) => {
     let product: Shoes = { ...cart.find((item: Shoes) => item.id === shoes.id) }
     const dispatch = useDispatch()
 
+    const [isRemove, setIsRemove] = useState<boolean>(false);
+
     const handleDeleteProductOfCart = () => {
-        const newCart = DeleteData(cart, shoes.id);
-        CartRequests.removeProduct(newCart, dispatch)
+        setIsRemove(true);
+
+        const handleDele = () => {
+            const newCart = DeleteData(cart, shoes.id);
+            CartRequests.removeProduct(newCart, dispatch)
+        }
+
+        setTimeout(handleDele, 300);
+
     }
 
     const reduceQuantity = () => {
@@ -43,9 +52,9 @@ const CartItem = ({ shoes }: CartItemProps) => {
     }
 
     return (
-        <div className='cart_item'>
+        <div className={`cart_item ${isRemove ? 'remove_cart_item' : ''} `} >
 
-            <div className='item_img cart-list-enter-active ' style={{ background: `${shoes.color}` }}>
+            <div className='item_img cart-list-enter-active ' style={{ background: `${shoes.color} ` }}>
                 <img src={shoes.image} alt="" />
             </div>
 
@@ -76,7 +85,7 @@ const CartItem = ({ shoes }: CartItemProps) => {
 
             </div>
 
-        </div>
+        </div >
 
     )
 }
