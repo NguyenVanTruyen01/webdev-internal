@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { EditData } from "./globalHandle/globalHandle";
 
 const cartSlice = createSlice({
     name: "CART",
@@ -7,7 +6,7 @@ const cartSlice = createSlice({
         cart: []
     },
     reducers: {
-        ADD_PRODUCT: (state, action) => {
+        ADD_PRODUCT: (state: any, action) => {
             state.cart = [...state.cart, action.payload]
         },
         REMOVE_PRODUCT: (state, action) => {
